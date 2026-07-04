@@ -1,84 +1,79 @@
 # Contexa – Hybrid RAG Knowledge Server (MCP Protocol)
 
-Contexa is a fully local Retrieval-Augmented Generation (RAG) knowledge server built on the Model Context Protocol (MCP). It enables AI assistants to search local documents without sending data to the cloud. The system indexes PDFs, Markdown files, source code, Office documents, notebooks, and many other file formats using hybrid search techniques that combine semantic search, BM25 keyword search, and cross-encoder reranking.
+Contexa is a local Hybrid Retrieval-Augmented Generation (RAG) Knowledge Server built using the Model Context Protocol (MCP). It helps AI assistants search and retrieve information from local documents without uploading any data to the cloud.
 
-The entire system runs on your machine using ONNX Runtime, requiring no external APIs, Docker, Ollama, or cloud services.
-
----
-
-## Overview
-
-Contexa provides an intelligent document retrieval system designed for developers, researchers, students, and organizations that require private, fast, and accurate document search.
-
-The system automatically indexes local documents and exposes them through the Model Context Protocol (MCP), allowing AI assistants such as Claude Desktop and other MCP-compatible clients to retrieve relevant information efficiently.
+The system combines semantic search, BM25 keyword search, and cross-encoder reranking to provide accurate and relevant search results. It works completely offline and supports multiple document formats such as PDF, Markdown, Word, PowerPoint, Excel, text files, and source code.
 
 ---
 
-## Features
+# Overview
 
-### Hybrid Search
+Contexa is designed for students, developers, researchers, and organizations who need a fast and private document search system.
+
+It automatically indexes documents stored on the local machine and allows MCP-compatible AI assistants to retrieve relevant information quickly.
+
+---
+
+# Features
+
+## Hybrid Search
 
 - Semantic vector search
 - BM25 keyword search
-- Reciprocal Rank Fusion (RRF)
-- Cross-Encoder reranking
-- Adjustable hybrid search ratio
+- Hybrid retrieval
+- Cross-encoder reranking
+- Better search accuracy
 
-### Document Management
+## Document Management
 
 - Automatic document indexing
 - Incremental reindexing
 - Background indexing
-- Duplicate detection
-- File watcher with automatic updates
-- CRUD operations for documents
+- Duplicate document detection
+- Auto-update when files change
 
-### Supported File Formats
+## Supported File Formats
 
-- Markdown (.md)
-- Text (.txt)
-- PDF (.pdf)
-- Python (.py)
+- PDF
+- Markdown
+- Text files
+- Python
 - C / C++
 - JavaScript
 - TypeScript
-- JSX / TSX
 - JSON
 - XML
 - CSV
 - DOCX
 - XLSX
 - PPTX
-- Jupyter Notebook (.ipynb)
+- Jupyter Notebook
 
-### AI Search Capabilities
+## Search Features
 
-- Semantic similarity search
+- Semantic search
 - Keyword search
 - Hybrid search
 - Category filtering
+- Similar document search
 - Query expansion
 - Snippet generation
-- Similar document search
-- Retrieval evaluation
 
-### Performance
+## Performance
 
-- Fast BM25 inverted index
+- Fast indexing
 - Query caching
-- Lazy model loading
-- Incremental indexing
-- Background reindexing
-- Memory-efficient architecture
+- Memory-efficient design
+- Incremental updates
+- Background processing
 
-### Local Execution
+## Local Execution
 
-- Runs completely offline
-- No API keys required
+- Works completely offline
 - No cloud storage
+- No API keys
 - No Docker required
-- ONNX Runtime inference
-- Optional NVIDIA GPU acceleration
+- Optional GPU support
 
 ---
 
@@ -86,13 +81,13 @@ The system automatically indexes local documents and exposes them through the Mo
 
 ## Backend
 
-- Python 3.11+
-- FastEmbed
-- ONNX Runtime
-- ChromaDB
+- Python 
 - FastMCP
+- ChromaDB
+- ONNX Runtime
+- FastEmbed
 
-## Search
+## Search Techniques
 
 - Semantic Embeddings
 - BM25
@@ -116,51 +111,44 @@ The system automatically indexes local documents and exposes them through the Mo
 
 ## Hybrid Retrieval
 
-Combines semantic embeddings with BM25 keyword search to provide highly accurate document retrieval.
+Combines semantic search and keyword search to provide more accurate search results.
 
-## Local AI
+## Local Processing
 
-Processes and searches documents entirely on the local machine without uploading data to external services.
+All documents remain on the local computer, ensuring privacy and security.
 
 ## Automatic Indexing
 
-Detects newly added or modified documents and updates the knowledge base automatically.
+Automatically detects new or updated files and updates the search index.
 
 ## Smart Chunking
 
-Uses markdown-aware chunking for documentation and language-aware parsing for source code files.
+Splits large documents into smaller sections for better retrieval.
 
-## Cross-Encoder Reranking
+## Reranking
 
-Improves retrieval quality by reranking search results based on contextual relevance.
+Ranks search results based on relevance before returning them.
 
 ## GPU Support
 
-Supports optional CUDA acceleration for faster indexing and query processing.
-
-## Incremental Updates
-
-Only modified documents are reindexed, significantly reducing indexing time.
+Supports optional NVIDIA GPU acceleration for faster processing.
 
 ---
 
 # MCP Tools
 
-Contexa provides the following MCP tools:
+The server provides the following MCP tools:
 
 - search_knowledge
 - get_document
 - reindex_documents
-- get_reindex_status
 - list_documents
 - list_categories
 - get_index_stats
 - add_document
 - update_document
 - remove_document
-- add_from_url
 - search_similar
-- evaluate_retrieval
 
 ---
 
@@ -170,37 +158,21 @@ Contexa provides the following MCP tools:
 contexa/
 │
 ├── mcp_server/
-│   ├── config.py
-│   ├── ingestion.py
-│   ├── server.py
-│   └── __init__.py
-│
 ├── documents/
-│
 ├── data/
-│   ├── chroma_db/
-│   └── index_metadata.json
-│
 ├── models_cache/
-│
-├── presets/
-│
 ├── tests/
-│
 ├── config.example.yaml
 ├── requirements.txt
-├── pyproject.toml
-├── install.sh
-├── install.ps1
-├── LICENSE
-└── README.md
+├── README.md
+└── LICENSE
 ```
 
 ---
 
 # Installation
 
-## Clone Repository
+## Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/contexa.git
@@ -208,11 +180,13 @@ git clone https://github.com/your-username/contexa.git
 cd contexa
 ```
 
-## Create Virtual Environment
+## Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
+
+## Activate the Environment
 
 ### Windows
 
@@ -232,25 +206,18 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Initialize
-
-```bash
-contexa init
-```
-
 ---
 
 # Usage
 
-Place your documents inside the `documents/` directory.
+Store your documents inside the **documents/** folder.
 
 ```text
 documents/
 ├── research/
-├── security/
-├── development/
 ├── notes/
-└── general/
+├── security/
+└── projects/
 ```
 
 Start the MCP server:
@@ -265,7 +232,7 @@ python -m mcp_server.server
 
 ```python
 search_knowledge(
-    query="SQL injection",
+    query="Machine Learning",
     hybrid_alpha=0.5,
     max_results=5
 )
@@ -275,101 +242,53 @@ search_knowledge(
 
 # Configuration
 
-The application is configured using a `config.yaml` file.
+The project uses a **config.yaml** file to configure:
 
-Configuration options include:
-
-- Documents directory
-- Data directory
-- Model cache
-- Chunk size
-- Chunk overlap
+- Document directory
+- Database location
 - Embedding model
 - Reranker model
+- Chunk size
 - Search settings
-- Category mappings
-- Query expansion
-- GPU acceleration
-- Server transport
+- GPU support
 
 ---
 
-# Supported Search Modes
+# Search Modes
 
 | Mode | Description |
 |------|-------------|
-| Keyword Search | BM25 only |
-| Semantic Search | Embedding similarity |
-| Hybrid Search | BM25 + Semantic |
-| Reranked Search | Hybrid + Cross Encoder |
+| Keyword Search | Searches using BM25 |
+| Semantic Search | Searches using embeddings |
+| Hybrid Search | Combines keyword and semantic search |
+| Reranked Search | Improves result ranking |
 
 ---
 
-# Use Cases
+# Applications
 
 - Personal Knowledge Base
-- Software Documentation
 - Research Papers
-- Company Documentation
+- Software Documentation
 - Source Code Search
 - Technical Notes
-- Security Documentation
 - Academic Projects
-- Offline AI Search
 - Enterprise Knowledge Management
 
 ---
 
-# Future Enhancements
+# Future Improvements
 
-- Distributed indexing
 - Multi-user support
 - Authentication
-- Web dashboard
+- Web Dashboard
 - REST API
-- Graph-based retrieval
-- OCR support
-- Image embeddings
-- Multi-language retrieval
-- Knowledge graph integration
+- OCR Support
+- Multi-language support
 
 ---
 
-# Contributing
 
-Contributions are welcome.
-
-1. Fork the repository.
-
-2. Create a feature branch.
-
-```bash
-git checkout -b feature/new-feature
-```
-
-3. Commit your changes.
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push your branch.
-
-```bash
-git push origin feature/new-feature
-```
-
-5. Open a Pull Request.
-
----
-
-# License
-
-This project is licensed under the MIT License.
-
-See the `LICENSE` file for more information.
-
----
 
 # Acknowledgments
 
@@ -379,7 +298,3 @@ See the `LICENSE` file for more information.
 - FastMCP
 - PyMuPDF
 - PyYAML
-- Beautiful Soup
-- python-docx
-- openpyxl
-- python-pptx
